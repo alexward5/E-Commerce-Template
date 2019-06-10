@@ -1,0 +1,278 @@
+<% include ./partials/adminheader %>
+
+	<main>
+		<div class="container">
+			<div class="jumbotron">
+				<a href="/new"><button type="button" class="btn btn-outline-success mb-4">Add New Item</button></a>
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+				  <li class="nav-item">
+				    <a class="nav-link active" id="skate-tab" data-toggle="tab" href="#skate" role="tab" aria-controls="skate" aria-selected="true">Skate</a>
+				  </li>
+					<li class="nav-item">
+				    <a class="nav-link" id="mens-tab" data-toggle="tab" href="#mens" role="tab" aria-controls="mens" aria-selected="false">Men's</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="womens-tab" data-toggle="tab" href="#womens" role="tab" aria-controls="womens" aria-selected="false">Women's</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" id="accessories-tab" data-toggle="tab" href="#accessories" role="tab" aria-controls="accessories" aria-selected="false">Accessories</a>
+				  </li>
+					<li class="nav-item">
+				    <a class="nav-link" id="featured-tab" data-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="false">Featured</a>
+				  </li>
+				</ul>
+				<div class="tab-content" id="myTabContent">
+
+				  <div class="tab-pane fade show active" id="skate" role="tabpanel" aria-labelledby="skate-tab">
+						<table class="table">
+						  <thead>
+						    <tr>
+						      <th scope="col">Item Name</th>
+						      <th scope="col">Item Price</th>
+						      <th scope="col"></th>
+						    </tr>
+						  </thead>
+						  <tbody>
+                <% products.forEach((product) => { %>
+                  <% if (product.category === 'skate') { %>
+    						    <tr class="table">
+    						      <td class="align-middle"><%= product.name %></td>
+    						      <td class="align-middle"><%= product.price %></td>
+    						      <td>
+                        <!-- convert id to string starting with 'a' to use as modal data target -->
+                        <% let stringId = JSON.stringify(product._id) %>
+                        <% stringId = stringId.replace(/["]+/g, '')%>
+                        <% stringId = `a${stringId}` %>
+                        <% const stringDataTarget = `#${stringId}` %>
+                        <!-- check if item is featured and prevent delete if so -->
+                        <% if (product.featured != true) { %>
+                          <button type="button" class="btn btn-outline-danger float-right ml-3" data-toggle="modal" data-target="<%= stringDataTarget %>">Delete</button>
+                        <% } else { %>
+                          <button type="button" class="btn btn-outline-danger float-right ml-3" data-toggle="modal" data-target="#featured-check">Delete</button>
+                        <% } %>
+    										<a href="/edit/<%= product._id %>"><button type="button" class="btn btn-outline-primary float-right">Edit</button></a>
+    										<!-- Modal -->
+    										<div class="modal fade mt-5" id="<%= stringId %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    										  <div class="modal-dialog" role="document">
+    										    <div class="modal-content">
+    										      <div class="modal-header">
+    										        <h5 class="modal-title">Confirm:</h5>
+    										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    										          <span aria-hidden="true">&times;</span>
+    										        </button>
+    										      </div>
+    										      <div class="modal-body">
+    										        <h5>Are you sure you want to delete this item?</h5>
+    										      </div>
+    										      <div class="modal-footer">
+                                <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      										        <button type="submit" class="btn btn-primary">Delete</button>
+                                </form>
+    										      </div>
+    										    </div>
+    										  </div>
+    										</div>
+                        <!-- Featured Check Modal -->
+    										<div class="modal fade mt-5" id="featured-check" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    										  <div class="modal-dialog" role="document">
+    										    <div class="modal-content">
+    										      <div class="modal-header">
+    										        <h5 class="modal-title">Warning:</h5>
+    										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    										          <span aria-hidden="true">&times;</span>
+    										        </button>
+    										      </div>
+    										      <div class="modal-body">
+    										        <h5>You can't delete a featured item.</h5>
+    										      </div>
+    										      <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      										        <button type="button" class="btn btn-primary">Accept</button>
+    										      </div>
+    										    </div>
+    										  </div>
+    										</div>
+    									</td>
+    						    </tr>
+                  <% } %>
+                <% }) %>
+						  </tbody>
+						</table>
+					</div>
+
+				  <div class="tab-pane fade" id="mens" role="tabpanel" aria-labelledby="mens-tab">
+            <table class="table">
+						  <thead>
+						    <tr>
+						      <th scope="col">Item Name</th>
+						      <th scope="col">Item Price</th>
+						      <th scope="col"></th>
+						    </tr>
+						  </thead>
+						  <tbody>
+                <% products.forEach((product) => { %>
+                  <% if (product.category === 'mens') { %>
+    						    <tr class="table">
+    						      <td class="align-middle"><%= product.name %></td>
+    						      <td class="align-middle"><%= product.price %></td>
+    						      <td>
+    										<button type="button" class="btn btn-outline-danger float-right ml-3" data-toggle="modal" data-target="#mens-delete">Delete</button>
+    										<a href="/edit/<%= product._id %>"><button type="button" class="btn btn-outline-primary float-right">Edit</button></a>
+    										<!-- Modal -->
+    										<div class="modal fade mt-5" id="mens-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    										  <div class="modal-dialog" role="document">
+    										    <div class="modal-content">
+    										      <div class="modal-header">
+    										        <h5 class="modal-title">Confirm:</h5>
+    										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    										          <span aria-hidden="true">&times;</span>
+    										        </button>
+    										      </div>
+    										      <div class="modal-body">
+    										        <h5>Are you sure you want to delete this item?</h5>
+    										      </div>
+    										      <div class="modal-footer">
+                                <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      										        <button type="submit" class="btn btn-primary">Delete</button>
+                                </form
+    										      </div>
+    										    </div>
+    										  </div>
+    										</div>
+    									</td>
+    						    </tr>
+                  <% } %>
+                <% }) %>
+						  </tbody>
+						</table>
+					</div>
+
+				  <div class="tab-pane fade" id="womens" role="tabpanel" aria-labelledby="womens-tab">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Item Name</th>
+									<th scope="col">Item Price</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+                <% products.forEach((product) => { %>
+                  <% if (product.category === 'womens') { %>
+    						    <tr class="table">
+    						      <td class="align-middle"><%= product.name %></td>
+    						      <td class="align-middle"><%= product.price %></td>
+    						      <td>
+    										<button type="button" class="btn btn-outline-danger float-right ml-3" data-toggle="modal" data-target="#womens-delete">Delete</button>
+    										<a href="/edit/<%= product._id %>"><button type="button" class="btn btn-outline-primary float-right">Edit</button></a>
+    										<!-- Modal -->
+    										<div class="modal fade mt-5" id="womens-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    										  <div class="modal-dialog" role="document">
+    										    <div class="modal-content">
+    										      <div class="modal-header">
+    										        <h5 class="modal-title">Confirm:</h5>
+    										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    										          <span aria-hidden="true">&times;</span>
+    										        </button>
+    										      </div>
+    										      <div class="modal-body">
+    										        <h5>Are you sure you want to delete this item?</h5>
+    										      </div>
+    										      <div class="modal-footer">
+                                <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      										        <button type="submit" class="btn btn-primary">Delete</button>
+                                </form>
+    										      </div>
+    										    </div>
+    										  </div>
+    										</div>
+    									</td>
+    						    </tr>
+                  <% } %>
+                <% }) %>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="tab-pane fade" id="accessories" role="tabpanel" aria-labelledby="accessories-tab">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Item Name</th>
+									<th scope="col">Item Price</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+                <% products.forEach((product) => { %>
+                  <% if (product.category === 'accessories') { %>
+    						    <tr class="table">
+    						      <td class="align-middle"><%= product.name %></td>
+    						      <td class="align-middle"><%= product.price %></td>
+    						      <td>
+    										<button type="button" class="btn btn-outline-danger float-right ml-3" data-toggle="modal" data-target="#accessories-delete">Delete</button>
+    										<a href="/edit/<%= product._id %>"><button type="button" class="btn btn-outline-primary float-right">Edit</button></a>
+    										<!-- Modal -->
+    										<div class="modal fade mt-5" id="accessories-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    										  <div class="modal-dialog" role="document">
+    										    <div class="modal-content">
+    										      <div class="modal-header">
+    										        <h5 class="modal-title">Confirm:</h5>
+    										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    										          <span aria-hidden="true">&times;</span>
+    										        </button>
+    										      </div>
+    										      <div class="modal-body">
+    										        <h5>Are you sure you want to delete this item?</h5>
+    										      </div>
+    										      <div class="modal-footer">
+                                <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      										        <button type="submit" class="btn btn-primary">Delete</button>
+                                </form
+    										      </div>
+    										    </div>
+    										  </div>
+    										</div>
+    									</td>
+    						    </tr>
+                  <% } %>
+                <% }) %>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="tab-pane fade" id="featured" role="tabpanel" aria-labelledby="featured-tab">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Item Name</th>
+									<th scope="col">Item Price</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+                <% products.forEach((product) => { %>
+                  <% if (product.featured === true) { %>
+                    <tr class="table">
+    									<td class="align-middle"><%= product.name %></td>
+    									<td class="align-middle"><%= product.price %></td>
+    									<td>
+    										 <a href="/featured/<%= product._id %>"><button type="button" class="btn btn-outline-primary float-right ml-3">Change Featured Item</button></a>
+    									</td>
+    								</tr>
+                  <% } %>
+                <% }); %>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</main>
+
+<% include ./partials/adminfooter %>

@@ -1,0 +1,51 @@
+<% include ./partials/header %>
+
+  <main class="item-body">
+    <div class="item-container">
+      <div class="item-images">
+        <div class="main-image box-shadow">
+          <img src="/images/<%= product.main_image %>" alt="">
+        </div>
+        <div class="alternate-images">
+          <div class="alternate-image">
+            <img src="/images/<%= product.alternate_image_1 %>" alt="">
+          </div>
+          <div class="alternate-image">
+            <img src="/images/<%= product.alternate_image_1 %>" alt="">
+          </div>
+          <div class="alternate-image">
+            <img src="/images/<%= product.alternate_image_1 %>" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="item-details">
+        <div class="item-title-price">
+            <p id="item-title"><%= product.name %></p>
+            <p>$<%= product.price %></p>
+        </div>
+        <div class="item-options">
+          <p>Color:</p>
+          <div class="flex">
+            <div class="option-box flex" style="background: white"></div>
+            <div class="option-box flex" style="background: black"></div>
+          </div>
+          <p>Size:</p>
+          <div class="flex">
+            <div class="option-box flex">S</div>
+            <div class="option-box flex">M</div>
+            <div class="option-box flex">L</div>
+            <div class="option-box flex">XL</div>
+          </div>
+          <div class="flex" id="buy-button">
+            <p>Purchase</p>
+          </div>
+        </div>
+      </div>
+      <div class="item-description">
+        <p class="description-header">Description</p>
+        <p><%= product.description %></p>
+      </div>
+    </div>
+  </main>
+
+<% include ./partials/footer %>

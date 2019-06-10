@@ -1,0 +1,42 @@
+.jumbotron {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+thead th {
+  background: white;
+  color: black;
+  font-size: 1.0rem;
+  text-decoration: underline;
+}
+
+tbody tr:nth-child(odd) {
+  background: #c6c8ca;
+  color: white;
+}
+
+tbody tr:nth-child(even) {
+  background: white;
+}
+
+.modal-body {
+  color: black;
+}
+
+label {
+  font-size: 1.0rem;
+}
+
+.form-group input, .form-group textarea {
+  background: white;
+}
+
+.form-control:valid {
+  background: white !important;
+}
+
+@media (max-width: 768px) {
+  .btn-outline-danger {
+    margin-bottom: 10px;
+  }
+}

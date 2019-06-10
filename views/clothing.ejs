@@ -1,0 +1,82 @@
+<% include ./partials/header %>
+
+<main class="results-body">
+
+  <section class="featured container">
+    <div class="featured-header">
+      <p>Men's</p>
+      <a href="/mens"><i class="fas fa-ellipsis-h"></i></a>
+    </div>
+    <div class="featured-images-grid">
+      <% let i=0 %>
+      <% products.forEach((product) => { %>
+        <% if (product.category === 'mens') { %>
+          <% if (i < 4) { %>
+            <a href="/mens/<%= product._id %>">
+              <div class="featured-image box-shadow top-featured-image">
+                <img src="/images/<%= product.main_image %>" alt="">
+                <div class="center-text featured-text">
+                  <p>View</p>
+                </div>
+              </div>
+            </a>
+          <% } %>
+          <% i++; %>
+        <% } %>
+      <% }) %>
+    </div>
+  </section>
+
+  <section class="featured container">
+    <div class="featured-header">
+      <p>Women's</p>
+      <a href="/womens"><i class="fas fa-ellipsis-h"></i></a>
+    </div>
+    <div class="featured-images-grid">
+      <% let ii=0 %>
+      <% products.forEach((product) => { %>
+        <% if (product.category === 'womens') { %>
+          <% if (ii < 4) { %>
+            <a href="/womens/<%= product._id %>">
+              <div class="featured-image box-shadow top-featured-image">
+                <img src="/images/<%= product.main_image %>" alt="">
+                <div class="center-text featured-text">
+                  <p>View</p>
+                </div>
+              </div>
+            </a>
+          <% } %>
+          <% ii++; %>
+        <% } %>
+      <% }) %>
+    </div>
+  </section>
+
+  <section class="featured container">
+    <div class="featured-header">
+      <p>Accessories</p>
+      <a href="/accessories"><i class="fas fa-ellipsis-h"></i></a>
+    </div>
+    <div class="featured-images-grid">
+      <% let iii=0 %>
+      <% products.forEach((product) => { %>
+        <% if (product.category === 'accessories') { %>
+          <% if (iii < 4) { %>
+            <a href="/accessories/<%= product._id %>">
+              <div class="featured-image box-shadow top-featured-image">
+                <img src="/images/<%= product.main_image %>" alt="">
+                <div class="center-text featured-text">
+                  <p>View</p>
+                </div>
+              </div>
+            </a>
+          <% } %>
+          <% iii++; %>
+        <% } %>
+      <% }) %>
+    </div>
+  </section>
+
+</main>
+
+<% include ./partials/footer %>

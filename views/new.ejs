@@ -1,0 +1,82 @@
+<% include ./partials/adminheader %>
+
+  <main>
+  	<div class="container">
+  		<div class="jumbotron">
+        <form action="/products" method="POST" autocomplete="off">
+          <fieldset>
+            <div class="form-group">
+              <label for="item-name">Item Name:</label>
+              <input type="text" class="form-control" id="item-name" name="product[name]" value="" required>
+            </div>
+            <div class="form-group">
+              <label for="item-price">Item Price:</label>
+              <input type="text" class="form-control" id="item-price" name="product[price]" value="" required>
+            </div>
+            <div class="form-group">
+              <label for="item-description">Item Description:</label>
+              <textarea class="form-control" id="item-description" name="product[description]" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="main-image">Main Image:</label>
+              <input type="text" class="form-control" id="main-image" name="product[main_image]" value="" required>
+            </div>
+            <div class="form-group">
+              <label for="alternate-image-1">Alternate Image 1:</label>
+              <input type="text" class="form-control" id="alternate-image-1" name="product[alternate_image_1]" value="" required>
+            </div>
+            <div class="form-group">
+              <label for="alternate-image-2">Alternate Image 2:</label>
+              <input type="text" class="form-control" id="alternate-image-2" name="product[alternate_image_2]" value="" required>
+            </div>
+            <div class="form-group">
+              <label for="alternate-image-3">Alternate Image 3:</label>
+              <input type="text" class="form-control" id="alternate-image-3" name="product[alternate_image_3]" value="" required>
+            </div>
+            <label for="category">Category:</label>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="product[category]" id="skate-category" value="skate" checked>
+                <label class="form-check-label" for="skate-category">Skate</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="product[category]" id="mens-category" value="mens">
+                <label class="form-check-label" for="mens-category">Men's</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="product[category]" id="womens-category" value="womens">
+                <label class="form-check-label" for="womens-category">Women's</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="product[category]" id="accessories-category" value="accessories">
+                <label class="form-check-label" for="accessories-category">Accessories</label>
+              </div>
+            </div>
+          </fieldset>
+          <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#save">Add Item</button>
+          <!-- Modal -->
+          <div class="modal fade mt-5" id="save" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Confirm:</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h5>Are you sure you want to add this item?</h5>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+  		</div>
+  	</div>
+  </main>
+
+<% include ./partials/adminfooter %>

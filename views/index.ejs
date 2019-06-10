@@ -1,0 +1,165 @@
+<% include ./partials/header %>
+
+	<!-- slider container -->
+  <section id="slider-container">
+
+	  <!-- slide -->
+	  <div class="slide fade" id="slide-0">
+	          <!-- slide image -->
+	          <img class="slider-image" src="/images/slider1-cropped-compressed.jpg" alt="First Image">
+						<div class="slider-content-container">
+							<div class="slider-image-text-container">
+								<p class="slider-image-text">Spring<br>Collection<br>2019</p>
+							</div>
+              <a href="/clothing">
+  							<div class="slider-image-button">
+  								<p>Shop</p>
+  								<i class="fas fa-arrow-right"></i>
+  							</div>
+              </a>
+						</div>
+
+	  </div>
+	  <!-- slide -->
+	  <div class="slide fade" id="slide-1">
+	          <!-- slide image -->
+	          <img class="slider-image"  src="/images/slider3-cropped-compressed.jpg" alt="Second Image">
+						<div class="slider-content-container">
+							<div class="slider-image-text-container">
+								<p class="slider-image-text">Summer<br>Collection<br>2019</p>
+							</div>
+              <a href="/clothing">
+  							<div class="slider-image-button">
+  								<p>Shop</p>
+  								<i class="fas fa-arrow-right"></i>
+  							</div>
+              </a>
+						</div>
+		</div>
+	  <!-- slide -->
+	  <div class="slide fade" id="slide-2">
+	          <!-- slide image -->
+	          <img class="slider-image"  src="/images/slider4-cropped-compressed.jpg" alt="Third Image">
+						<div class="slider-content-container">
+							<div class="slider-image-text-container">
+								<p class="slider-image-text">Fall<br>Collection<br>2019</p>
+							</div>
+              <a href="/clothing">
+  							<div class="slider-image-button">
+  								<p>Shop</p>
+  								<i class="fas fa-arrow-right"></i>
+  							</div>
+              </a>
+						</div>
+		</div>
+
+	  <!-- arrows -->
+	  <div id="arrows-wrapper" class="">
+	          <!-- previous arrow -->
+	          <p class="slider-arrow center_y" id="arrow-prev">&#10094;</p>
+	          <!-- next arrow -->
+	          <p class="slider-arrow center_y" id="arrow-next">&#10095;</p>
+	  </div>
+
+	  <!-- dots -->
+	  <div id="dots-wrapper" class="center_x">
+	          <!-- dot navigation for each slide -->
+	          <div class="dot-navigation"></div>
+	          <!-- dot navigation for each slide -->
+	          <div class="dot-navigation"></div>
+	          <!-- dot navigation for each slide -->
+	          <div class="dot-navigation"></div>
+	  </div>
+  </section>
+
+	<section class="splash-text-container">
+		<div class="splash-text">
+			<p>This is a template for an e-commerce website built with node.js and mongoDB. The website includes a CMS, so the content can be edited by the website owner.</p>
+		</div>
+	</section>
+
+	<main>
+		<section class="featured container">
+			<div class="featured-header">
+				<p>Featured</p>
+        <a href="/clothing"><i class="fas fa-ellipsis-h"></i></a>
+			</div>
+			<div class="featured-images-grid">
+        <% products.forEach((product) => { %>
+          <% if (product.featured === true) { %>
+            <a href="/<%= product.category %>/<%= product._id %>">
+              <div class="featured-image box-shadow top-featured-image">
+      					<img src="/images/<%= product.main_image %>" alt="">
+      					<div class="center-text featured-text">
+      						<p>View</p>
+      					</div>
+      				</div>
+            </a>
+          <% } %>
+        <% }); %>
+			</div>
+		</section>
+
+		<section class="categories container">
+			<div class="categories-grid">
+				<div class="category-image box-shadow">
+					<a href="/mens">
+						<img src="/images/category1-cropped-compressed.jpg" alt="">
+						<div class="category-text center-text">
+							<p>Men's</p>
+						</div>
+					</a>
+				</div>
+				<div class="category-image box-shadow">
+					<a href="/womens">
+						<img src="/images/category2-cropped-compressed.jpg" alt="">
+						<div class="category-text center-text"  style="color: white">
+							<p>Women's</p>
+						</div>
+					</a>
+				</div>
+				<div class="category-image box-shadow">
+					<a href="/skate">
+						<img src="/images/category3-cropped-compressed.jpg" alt="">
+						<div class="category-text center-text" style="color: white">
+							<p>Skate Gear</p>
+						</div>
+					</a>
+				</div>
+				<div class="category-image box-shadow">
+					<a href="/accessories">
+						<img src="/images/category4-cropped-compressed.jpg" alt="">
+						<div class="category-text center-text">
+							<p>Accessories</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="about">
+			<div class="about-container container">
+				<div class="about-card top-about-card">
+					<i class="fas fa-store-alt"></i>
+					<p class="about-title">Lorem ipsum dolor</p>
+					<p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis eget mauris id congue.</p>
+				</div>
+				<div class="about-card top-about-card">
+					<i class="fas fa-shopping-cart"></i>
+					<p class="about-title">Lorem ipsum dolor</p>
+					<p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis eget mauris id congue.</p>
+				</div>
+				<div class="about-card">
+					<i class="fas fa-tshirt"></i>
+					<p class="about-title">Lorem ipsum dolor</p>
+					<p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis eget mauris id congue.</p>
+				</div>
+				<div class="about-card">
+					<i class="fas fa-globe-americas"></i>
+					<p class="about-title">Lorem ipsum dolor</p>
+					<p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis eget mauris id congue.</p>
+				</div>
+			</div>
+		</section>
+
+<% include ./partials/footer %>

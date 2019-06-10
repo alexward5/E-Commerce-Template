@@ -1,0 +1,75 @@
+<% include ./partials/adminheader %>
+
+  <main>
+  	<div class="container">
+  		<div class="jumbotron">
+        <h4>Current Featured Item:</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Item Name</th>
+              <th scope="col">Item Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table">
+              <td class="align-middle"><%= selected.name %></td>
+              <td class="align-middle"><%= selected.price %></td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>Replace With:</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Item Name</th>
+              <th scope="col">Item Price</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% products.forEach((product) => { %>
+              <% if (product.featured != true) { %>  
+                <tr class="table">
+                  <td class="align-middle"><%= product.name %></td>
+                  <td class="align-middle"><%= product.price %></td>
+                  <td>
+                    <!-- convert id to string starting with 'a' to use as modal data target -->
+                    <% let stringId = JSON.stringify(product._id) %>
+                    <% stringId = stringId.replace(/["]+/g, '')%>
+                    <% stringId = `a${stringId}` %>
+                    <% const stringDataTarget = `#${stringId}` %>
+                    <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="<%= stringDataTarget %>">Select</button>
+                    <!-- Modal -->
+                    <div class="modal fade mt-5" id="<%= stringId %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Confirm:</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <h5>Are you sure you want to change this featured item?</h5>
+                          </div>
+                          <div class="modal-footer">
+                            <form action="/featured/<%= selected._id %>/<%= product._id %>?_method=PUT" method="POST">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Change</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              <% } %>
+            <% }) %>
+          </tbody>
+        </table>
+  		</div>
+  	</div>
+  </main>
+
+<% include ./partials/adminfooter %>

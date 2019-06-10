@@ -1,0 +1,46 @@
+<% include ./partials/header %>
+
+<main class="results-body">
+  <section class="featured container">
+    <div class="featured-header">
+      <% if (type === 'skate') { %>
+        <p>Skate Gear</p>
+      <% } %>
+      <% if (type === 'mens') { %>
+        <p>Men's</p>
+      <% } %>
+      <% if (type === 'womens') { %>
+        <p>Women's</p>
+      <% } %>
+      <% if (type === 'accessories') { %>
+        <p>Accessories</p>
+      <% } %>
+    </div>
+    <div class="featured-images-grid">
+      <% products.forEach((product) => { %>
+        <% if (product.category === type) { %>
+          <a href="/<%= product.category %>/<%= product._id %>">
+            <div class="item box-shadow">
+              <div class="item-image">
+                <img src="./images/<%= product.main_image %>" alt="">
+                <div class="center-text featured-text">
+                  <p>View</p>
+                </div>
+              </div>
+              <div class="item-info">
+                <div class="item-name">
+                  <p><%= product.name %></p>
+                </div>
+                <div class="item-price">
+                  <p>$<%= product.price %></p>
+                </div>
+              </div>
+            </div>
+          </a>
+        <% } %>
+      <% }) %>
+    </div>
+  </section>
+</main>
+
+<% include ./partials/footer %>
