@@ -1,9 +1,32 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const expressSanitizer = require('express-sanitizer');
+const admin = require('firebase-admin');
+
+// set up firebase admin account with environment variables
+const serviceAccount = {
+  "type": process.env.TYPE,
+  "project_id": process.env.PROJECT_ID,
+  "private_key_id": process.env.PRIVATE_KEY_ID,
+  "private_key": process.env.PRIVATE_KEY,
+  "client_email": process.env.CLIENT_EMAIL,
+  "client_id": process.env.CLIENT_ID,
+  "auth_uri": process.env.AUTH_URI,
+  "token_uri": process.env.TOKEN_URI,
+  "auth_provider_x509_cert_url": process.env.AUTH_PROVIDER_CERT_URL,
+  "client_x509_cert_url": process.env.CLIENT_CERT_URL
+}
+
+// initialize firebase admin
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+// initialize an instance of cloud firestore
+const db = admin.firestore();
 
 // set up body parser / view engine
 app.use(bodyParser.urlencoded({extended: true}));
@@ -18,9 +41,6 @@ app.use(express.static('public'));
 
 // tell app to use method-override for PUT and DELETE requests
 app.use(methodOverride('_method'));
-
-// tell app to use express santiizer
-app.use(expressSanitizer());
 
 // config schema and model
 const productSchema = new mongoose.Schema({
@@ -152,14 +172,32 @@ app.get('/accessories/:id', (req, res) => {
   });
 });
 
+// ADMIN AND LOGIN ROUTES
+
+app.get('/admin/login', (req, res) => {
+  res.render('adminlogin');
+});
+
 app.get('/admin', (req, res) => {
-  Product.find({}, (err, products) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('admin', {products: products});
-    }
-  });
+  res.redirect('/admin/login');
+});
+
+app.get('/admin/:email', (req, res) => {
+  admin.auth().getUserByEmail(req.params.email)
+    .then(function(userRecord) {
+      // console.log('Successfully fetched user data:', userRecord.toJSON());
+      Product.find({}, (err, products) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render('admin', {products: products});
+        }
+      });
+    })
+    .catch(function(error) {
+       // console.log('Error fetching user data:', error);
+       res.redirect('/admin/login');
+    });
 });
 
 // EDIT FEATURED ROUTE
