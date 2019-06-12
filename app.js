@@ -8,7 +8,7 @@ const admin = require('firebase-admin');
 const Product = require('./models/product');
 
 const seedDB = require('./seed');
-// seedDB();
+seedDB();
 
 // set up firebase admin account with environment variables
 const serviceAccount = {
