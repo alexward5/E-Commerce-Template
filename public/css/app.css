@@ -112,7 +112,11 @@ a {
 }
 
 .icon {
-  padding-left: 30px;
+  margin-left: 30px;
+}
+
+.icon:hover {
+  cursor: pointer;
 }
 
 /* TOGGLE MENU */

@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const admin = require('firebase-admin');
+const Product = require('./models/product');
+
+const seedDB = require('./seed');
+// seedDB();
 
 // set up firebase admin account with environment variables
 const serviceAccount = {
@@ -42,21 +46,7 @@ app.use(express.static('public'));
 // tell app to use method-override for PUT and DELETE requests
 app.use(methodOverride('_method'));
 
-// config schema and model
-const productSchema = new mongoose.Schema({
-  name: String,
-  price: String,
-  category: String,
-  description: String,
-  featured: {type: Boolean, default: false},
-  main_image: String,
-  alternate_image_1: String,
-  alternate_image_2: String,
-  alternate_image_3: String,
-  created: {type: Date, default: Date.now}   // date will be automatic
-});
 
-const Product = mongoose.model('Product', productSchema);
 
 // Product.create({
 //   name: 'Item Name',

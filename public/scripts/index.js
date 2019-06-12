@@ -39,7 +39,7 @@ document.querySelector("#arrow-prev").addEventListener("click", function(){
     clearInterval(sliderInterval);
     sliderInterval = setInterval(function(){
         showSlides(++SLIDEINDEX);
-    }, 10000);
+    }, 8000);
 });
 
 // select the next arrow element and add a click event using addEventListener method
@@ -51,7 +51,7 @@ document.querySelector("#arrow-next").addEventListener("click", function(){
     clearInterval(sliderInterval);
     sliderInterval = setInterval(function(){
         showSlides(++SLIDEINDEX);
-    }, 10000);
+    }, 8000);
 });
 
 // select all the dots using querySelectorAll and iterate over each one using forEach method
@@ -69,11 +69,11 @@ document.querySelectorAll(".dot-navigation").forEach(function(element){
         clearInterval(sliderInterval);
         sliderInterval = setInterval(function(){
             showSlides(++SLIDEINDEX);
-        }, 10000);
+        }, 8000);
     });
 });
 
 // lets set our slide automatic using setInterval method
 var sliderInterval = setInterval(function(){
     showSlides(++SLIDEINDEX);
-}, 1000000);
+}, 8000);

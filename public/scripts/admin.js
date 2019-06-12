@@ -2,7 +2,7 @@
 firebase.auth().onAuthStateChanged(user => {
   if(user) {
     // After successful login, user will be redirected to admin page
-    if (window.location.pathname !== `/admin/${user.email}`) {
+    if (window.location.pathname === `/admin/login`) {
       window.location.pathname = `/admin/${user.email}`;
     }
   } else {
